@@ -1,13 +1,13 @@
 {
-  "name": "@dashevo/dashcore-node",
-  "description": "Full node with extended capabilities using Dashcore and Dash Core (dashd)",
+  "name": "orecore-node",
+  "description": "Full node with extended capabilities using Orecore (galactrumd)",
   "author": "BitPay <dev@bitpay.com>",
   "version": "4.0.0",
   "main": "./index.js",
-  "repository": "git://github.com/dashevo/dashcore-node.git",
-  "homepage": "https://github.com/dashevo/dashcore-node",
+  "repository": "git://github.com/GAB5TER/orecore-node.git",
+  "homepage": "https://github.com/GAB5TER/orecore-node",
   "bugs": {
-    "url": "https://github.com/dashevo/dashcore-node/issues"
+    "url": "https://github.com/GAB5TER/orecore-node/issues"
   },
   "contributors": [
     {
@@ -24,10 +24,15 @@
     {
       "name": "Patrick Nagurny",
       "email": "patrick@bitpay.com"
+    },
+    {
+      "name": "GAB5TER",
+      "email": "GAB5TER@protonmail.com"
     }
+    
   ],
   "bin": {
-    "dashcore-node": "./bin/dashcore-node"
+    "orecore-node": "./bin/orecore-node"
   },
   "scripts": {
     "test": "mocha -R spec --recursive",
@@ -36,15 +41,16 @@
     "coverage": "istanbul cover _mocha -- --recursive",
     "coveralls": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --recursive -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "mocha": "./node_modules/.bin/mocha",
-    "dashd_test": "./node_modules/.bin/mocha test/services/dashd.unit.js"
+    "galactrumd_test": "./node_modules/.bin/mocha test/services/galactrumd.unit.js"
   },
   "tags": [
-    "dash",
-    "dashd"
+    "orecore",
+    "galactrum",
+    "galactrumd"
   ],
   "dependencies": {
-    "@dashevo/dashcore-lib": "^0.15.5",
-    "@dashevo/dashd-rpc": "^1.0.1",
+    "orecore-lib": "GAB5TER/orecore-lib",
+    "galactrumd-rpc": "GAB5TER/galactrumd-rpc",
     "async": "^1.3.0",
     "body-parser": "^1.13.3",
     "colors": "^1.1.2",
@@ -66,7 +72,7 @@
   },
   "devDependencies": {
     "benchmark": "1.0.0",
-    "@dashevo/dashcore-p2p": "^1.1.6",
+    "orecore-p2p": "GAB5TER/orecore-p2p",
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.3",
