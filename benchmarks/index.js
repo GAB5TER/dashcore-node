@@ -1,15 +1,15 @@
 'use strict';
 
 var benchmark = require('benchmark');
-var dashdRPC = require('@dashevo/dashd-rpc');
+var galactrumdRPC = require('galactrumd-rpc');
 var async = require('async');
 var maxTime = 20;
 
-console.log('Dash Service native interface vs. Dash JSON RPC interface');
+console.log('Galactrum Service native interface vs. Galactrum JSON RPC interface');
 console.log('----------------------------------------------------------------------');
 
-// To run the benchmarks a fully synced Dash Core directory is needed. The RPC comands
-// can be modified to match the settings in dash.conf.
+// To run the benchmarks a fully synced Galactrum directory is needed. The RPC comands
+// can be modified to match the settings in galactrum.conf.
 
 var fixtureData = {
   blockHashes: [
@@ -26,35 +26,35 @@ var fixtureData = {
   ]
 };
 
-var dashd = require('../').services.Dash({
+var galactrumd = require('../').services.Galactrum({
   node: {
-    datadir: process.env.HOME + '/.dash',
+    datadir: process.env.HOME + '/.galactrum',
     network: {
       name: 'testnet'
     }
   }
 });
 
-dashd.on('error', function(err) {
+galactrumd.on('error', function(err) {
   console.error(err.message);
 });
 
-dashd.start(function(err) {
+galactrumd.start(function(err) {
   if (err) {
     throw err;
   }
-  console.log('Dash Core started');
+  console.log('Galactrum Core started');
 });
 
-dashd.on('ready', function() {
+galactrumd.on('ready', function() {
 
-  console.log('Dash Core ready');
+  console.log('Galactrum Core ready');
 
-  var client = new dashdRPC({
+  var client = new galactrumdRPC({
     host: 'localhost',
     port: 18332,
-    user: 'dash',
-    pass: 'local321'
+    user: 'user',
+    pass: 'pass'
   });
 
   async.series([
@@ -64,12 +64,12 @@ dashd.on('ready', function() {
       var hashesLength = fixtureData.blockHashes.length;
       var txLength = fixtureData.txHashes.length;
 
-      function dashdGetBlockNative(deffered) {
+      function galactrumdGetBlockNative(deffered) {
         if (c >= hashesLength) {
           c = 0;
         }
         var hash = fixtureData.blockHashes[c];
-        dashd.getBlock(hash, function(err, block) {
+        galactrumd.getBlock(hash, function(err, block) {
           if (err) {
             throw err;
           }
@@ -78,7 +78,7 @@ dashd.on('ready', function() {
         c++;
       }
 
-      function dashdGetBlockJsonRpc(deffered) {
+      function galactrumdGetBlockJsonRpc(deffered) {
         if (c >= hashesLength) {
           c = 0;
         }
@@ -92,12 +92,12 @@ dashd.on('ready', function() {
         c++;
       }
 
-      function dashGetTransactionNative(deffered) {
+      function galactrumGetTransactionNative(deffered) {
         if (c >= txLength) {
           c = 0;
         }
         var hash = fixtureData.txHashes[c];
-        dashd.getTransaction(hash, true, function(err, tx) {
+        galactrumd.getTransaction(hash, true, function(err, tx) {
           if (err) {
             throw err;
           }
@@ -106,7 +106,7 @@ dashd.on('ready', function() {
         c++;
       }
 
-      function dashGetTransactionJsonRpc(deffered) {
+      function galactrumGetTransactionJsonRpc(deffered) {
         if (c >= txLength) {
           c = 0;
         }
@@ -122,22 +122,22 @@ dashd.on('ready', function() {
 
       var suite = new benchmark.Suite();
 
-      suite.add('dashd getblock (native)', dashdGetBlockNative, {
+      suite.add('galactrumd getblock (native)', galactrumdGetBlockNative, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('dashd getblock (json rpc)', dashdGetBlockJsonRpc, {
+      suite.add('galactrumd getblock (json rpc)', galactrumdGetBlockJsonRpc, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('dashd gettransaction (native)', dashGetTransactionNative, {
+      suite.add('galactrumd gettransaction (native)', galactrumGetTransactionNative, {
         defer: true,
         maxTime: maxTime
       });
 
-      suite.add('dashd gettransaction (json rpc)', dashGetTransactionJsonRpc, {
+      suite.add('galactrumd gettransaction (json rpc)', galactrumGetTransactionJsonRpc, {
         defer: true,
         maxTime: maxTime
       });
@@ -158,7 +158,7 @@ dashd.on('ready', function() {
       throw err;
     }
     console.log('Finished');
-    dashd.stop(function(err) {
+    galactrumd.stop(function(err) {
       if (err) {
         console.error('Fail to stop services: ' + err);
         process.exit(1);

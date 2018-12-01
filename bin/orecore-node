@@ -1,0 +1,4 @@
+#!/usr/bin/env node
+
+var orecore = require('../lib/cli/orecore');
+orecore();
