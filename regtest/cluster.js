@@ -4,46 +4,46 @@ var path = require('path');
 var async = require('async');
 var spawn = require('child_process').spawn;
 
-var DashdRPC = require('@dashevo/dashd-rpc');
+var GalactrumdRPC = require('galactrumd-rpc');
 var rimraf = require('rimraf');
-var dashcore = require('@dashevo/dashcore-lib');
+var orecore = require('orecore-lib');
 var chai = require('chai');
 var should = chai.should();
 
 var index = require('..');
 var log = index.log;
 log.debug = function() {};
-var DashcoreNode = index.Node;
-var DashService = index.services.Dash;
+var OrecoreNode = index.Node;
+var OreService = index.services.Galactrum;
 
-describe('Dash Cluster', function() {
+describe('Galactrum Cluster', function() {
   var node;
   var daemons = [];
-  var execPath = path.resolve(__dirname, process.env.HOME, './.dashcore/data/dashd')
+  var execPath = path.resolve(__dirname, process.env.HOME, './.orecore/data/galactrumd')
   var nodesConf = [
     {
       datadir: path.resolve(__dirname, './data/node1'),
-      conf: path.resolve(__dirname, './data/node1/dash.conf'),
-      rpcuser: 'dash',
-      rpcpassword: 'local321',
+      conf: path.resolve(__dirname, './data/node1/galactrum.conf'),
+      rpcuser: 'user',
+      rpcpassword: 'pass',
       rpcport: 30521,
       zmqpubrawtx: 'tcp://127.0.0.1:30611',
       zmqpubhashblock: 'tcp://127.0.0.1:30611'
     },
     {
       datadir: path.resolve(__dirname, './data/node2'),
-      conf: path.resolve(__dirname, './data/node2/dash.conf'),
-      rpcuser: 'dash',
-      rpcpassword: 'local321',
+      conf: path.resolve(__dirname, './data/node2/galactrum.conf'),
+      rpcuser: 'user',
+      rpcpassword: 'pass',
       rpcport: 30522,
       zmqpubrawtx: 'tcp://127.0.0.1:30622',
       zmqpubhashblock: 'tcp://127.0.0.1:30622'
     },
     {
       datadir: path.resolve(__dirname, './data/node3'),
-      conf: path.resolve(__dirname, './data/node3/dash.conf'),
-      rpcuser: 'dash',
-      rpcpassword: 'local321',
+      conf: path.resolve(__dirname, './data/node3/galactrum.conf'),
+      rpcuser: 'user',
+      rpcpassword: 'pass',
       rpcport: 30523,
       zmqpubrawtx: 'tcp://127.0.0.1:30633',
       zmqpubhashblock: 'tcp://127.0.0.1:30633'
@@ -51,7 +51,7 @@ describe('Dash Cluster', function() {
   ];
 
   before(function(done) {
-    log.info('Starting 3 dashd daemons');
+    log.info('Starting 3 galactrumd daemons');
     this.timeout(200000);
     async.each(nodesConf, function(nodeConf, next) {
       var opts = [
@@ -67,7 +67,7 @@ describe('Dash Cluster', function() {
 
         var process = spawn(execPath, opts, {stdio: 'inherit'});
 
-        var client = new DashdRPC({
+        var client = new GalactrumdRPC({
           protocol: 'http',
           host: '127.0.0.1',
           port: nodeConf.rpcport,
@@ -96,35 +96,35 @@ describe('Dash Cluster', function() {
     }, 1000);
   });
 
-  it('step 1: will connect to three dashd daemons', function(done) {
+  it('step 1: will connect to three galactrumd daemons', function(done) {
     this.timeout(20000);
     var configuration = {
       network: 'regtest',
       services: [
         {
-          name: 'dashd',
-          module: DashService,
+          name: 'galactrumd',
+          module: GalactrumService,
           config: {
             connect: [
               {
                 rpchost: '127.0.0.1',
                 rpcport: 30521,
-                rpcuser: 'dash',
-                rpcpassword: 'local321',
+                rpcuser: 'user',
+                rpcpassword: 'pass',
                 zmqpubrawtx: 'tcp://127.0.0.1:30611'
               },
               {
                 rpchost: '127.0.0.1',
                 rpcport: 30522,
-                rpcuser: 'dash',
-                rpcpassword: 'local321',
+                rpcuser: 'user',
+                rpcpassword: 'pass',
                 zmqpubrawtx: 'tcp://127.0.0.1:30622'
               },
               {
                 rpchost: '127.0.0.1',
                 rpcport: 30523,
-                rpcuser: 'dash',
-                rpcpassword: 'local321',
+                rpcuser: 'user',
+                rpcpassword: 'pass',
                 zmqpubrawtx: 'tcp://127.0.0.1:30633'
               }
             ]
@@ -133,10 +133,10 @@ describe('Dash Cluster', function() {
       ]
     };
 
-    var regtest = dashcore.Networks.get('regtest');
+    var regtest = orecore.Networks.get('regtest');
     should.exist(regtest);
 
-    node = new DashcoreNode(configuration);
+    node = new OrecoreNode(configuration);
 
     node.on('error', function(err) {
       log.error(err);
@@ -156,7 +156,7 @@ describe('Dash Cluster', function() {
 
   it('step 2: receive block events', function(done) {
     this.timeout(10000);
-    node.services.dashd.once('tip', function(height) {
+    node.services.galactrumd.once('tip', function(height) {
       height.should.equal(1);
       done();
     });
