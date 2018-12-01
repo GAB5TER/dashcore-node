@@ -10,23 +10,21 @@ nvm install v4
 
 ## Fork and Download Repositories
 
-To develop bitcore-node-dash:
+To develop orecore-node:
 
 ```bash
 cd ~
-git clone git@github.com:<yourusername>/bitcore-node-dash.git
-git clone git@github.com:<yourusername>/bitcore-lib.git
+git clone git@github.com:<yourusername>/oreore-node.git
+git clone git@github.com:<yourusername>/orecore-lib.git
 ```
 
-To develop bitcoin or to compile from source:
+To develop Galactrum or to compile from source:
 
 ```bash
-git clone git@github.com:<yourusername>/bitcoin.git
+git clone git@github.com:<yourusername>/galactrum.git
 git fetch origin <branchname>:<branchname>
 git checkout <branchname>
 ```
-**Note**: See bitcoin documentation for building bitcoin on your platform.
-
 
 ## Install Development Dependencies
 
@@ -46,27 +44,19 @@ brew install zeromq
 ## Install and Symlink
 
 ```bash
-cd bitcore-lib
+cd orecore-lib
 npm install
-cd ../bitcore-node-dash
+cd ../orecore-node
 npm install
 ```
-**Note**: If you get a message about not being able to download bitcoin distribution, you'll need to compile bitcoind from source, and setup your configuration to use that version.
 
-
-We now will setup symlinks in `bitcore-node-dash` *(repeat this for any other modules you're planning on developing)*:
+We now will setup symlinks in `orecore-node` *(repeat this for any other modules you're planning on developing)*:
 ```bash
 cd node_modules
-rm -rf bitcore-lib
-ln -s ~/bitcore-lib
-rm -rf bitcoind-rpc-dash
-ln -s ~/bitcoind-rpc-dash
-```
-
-And if you're compiling or developing bitcoin:
-```bash
-cd ../bin
-ln -sf ~/bitcoin/src/bitcoind
+rm -rf orecore-lib
+ln -s ~/orecore-lib
+rm -rf galactrumd-rpc
+ln -s ~/galactrumd-rpc
 ```
 
 ## Run Tests
@@ -78,19 +68,19 @@ npm install mocha -g
 
 To run all test suites:
 ```bash
-cd bitcore-node-dash
+cd orecore-node
 npm run regtest
 npm run test
 ```
 
 To run a specific unit test in watch mode:
 ```bash
-mocha -w -R spec test/services/bitcoind.unit.js
+mocha -w -R spec test/services/galactrumd.unit.js
 ```
 
 To run a specific regtest:
 ```bash
-mocha -R spec regtest/bitcoind.js
+mocha -R spec regtest/galactrumd.js
 ```
 
 ## Running a Development Node
@@ -102,46 +92,46 @@ cd ~
 mkdir devnode
 cd devnode
 mkdir node_modules
-touch bitcore-node-dash.json
+touch orecore-node.json
 touch package.json
 ```
 
-Edit `bitcore-node-dash.json` with something similar to:
+Edit `orecore-node.json` with something similar to:
 ```json
 {
   "network": "livenet",
   "port": 3001,
   "services": [
-    "bitcoind",
+    "galactrumd",
     "web",
     "insight-api",
     "insight-ui",
     "<additional_service>"
   ],
   "servicesConfig": {
-    "bitcoind": {
+    "galactrumd": {
       "spawn": {
-        "datadir": "/home/<youruser>/.bitcoin",
-        "exec": "/home/<youruser>/bitcoin/src/bitcoind"
+        "datadir": "/home/<youruser>/.galactrum",
+        "exec": "/home/<youruser>/galactrum/src/galactrumd"
       }
     }
   }
 }
 ```
 
-**Note**: To install services [insight-api](https://github.com/bitpay/insight-api) and [insight-ui](https://github.com/bitpay/insight-ui) you'll need to clone the repositories locally.
+**Note**: To install services [insight-api](https://github.com/GAB5TER/insight-api) and [insight-ui](https://github.com/GAB5TER/insight-ui) you'll need to clone the repositories locally.
 
 Setup symlinks for all of the services and dependencies:
 
 ```bash
 cd node_modules
-ln -s ~/bitcore-lib
-ln -s ~/bitcore-node-dash
+ln -s ~/orecore-lib
+ln -s ~/orecore-node
 ln -s ~/insight-api
 ln -s ~/insight-ui
 ```
 
-Make sure that the `<datadir>/bitcoin.conf` has the necessary settings, for example:
+Make sure that the `<datadir>/galactrum.conf` has the necessary settings, for example:
 ```
 server=1
 whitelist=127.0.0.1
@@ -152,11 +142,11 @@ spentindex=1
 zmqpubrawtx=tcp://127.0.0.1:28332
 zmqpubhashblock=tcp://127.0.0.1:28332
 rpcallowip=127.0.0.1
-rpcuser=bitcoin
-rpcpassword=local321
+rpcuser=user
+rpcpassword=pass
 ```
 
 From within the `devnode` directory with the configuration file, start the node:
 ```bash
-../bitcore-node-dash/bin/bitcore-node-dash start
+../orecore-node/bin/orecore-node start
 ```
