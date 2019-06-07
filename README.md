@@ -10,6 +10,7 @@ A Galactrum full node for building applications and services with Node.js. A nod
 ```bash
 git clone https://github.com/GAB5TER/orecore-node
 cd orecore-node
+npm install
 ./bin/orecore-node start
 ```
 
@@ -45,8 +46,9 @@ node.on('ready', function() {
 
 ## Prerequisites
 
+<<<<<<< HEAD
 - Galactrum (galactrumd) with support for additional indexing *(see above)*
-- Node.js v0.10, v0.12, v4 or v5
+- Node.js v8+
 - ZeroMQ *(libzmq3-dev for Ubuntu/Debian or zeromq on OSX)*
 - ~20GB of disk storage
 - ~1GB of RAM
@@ -71,11 +73,11 @@ For more information about (and developing) services, please see the [Service Do
 
 ## Add-on Services
 
-There are several add-on services available to extend the functionality of Bitcore:
+There are several add-on services available to extend the functionality of Orecore:
 
 - [Insight API](https://github.com/GAB5TER/insight-api/tree/master)
 - [Insight UI](https://github.com/GAB5TER/insight-ui/tree/master)
-- [Bitcore Wallet Service](https://github.com/GAB5TER/orecore-wallet-service/tree/master)
+- [Orecore Wallet Service](https://github.com/GAB5TER/orecore-wallet-service/tree/master)
 
 ## Documentation
 
@@ -120,7 +122,5 @@ Please send pull requests for bug fixes, code optimization, and ideas for improv
 ## License
 
 Code released under [the MIT license](https://github.com/GAB5TER/orecore-node/blob/master/LICENSE).
-
-Copyright 2013-2015 BitPay, Inc.
 
 - bitcoin: Copyright (c) 2009-2015 Bitcoin Core Developers (MIT License)
