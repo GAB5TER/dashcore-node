@@ -26,7 +26,7 @@ var GalactrumService = proxyquire('../../lib/services/galactrumd', {
 var defaultGalactrumConf = fs.readFileSync(path.resolve(__dirname, '../data/default.galactrum.conf'), 'utf8');
 
 describe('Galactrum Service', function() {
-  var txhex = '01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff0704ffff001d0104ffffffff0100f2052a0100000043410496b538e853519c726a2c91e61ec11600ae1390813a627c66fb8be7947be63c52da7589379515d4e0a604f8141781e62294721166bf621e73a82cbf2342c858eeac00000000';
+  var txhex = '01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff03510101ffffffff0100e07823675800002321021ffd7bef28046fb47a613eef220ab0770ed464bf4f8005e8d023b95b51604851ac00000000';
 
   var baseConfig = {
     node: {
@@ -241,25 +241,25 @@ describe('Galactrum Service', function() {
     it('will add a valid address', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter = new EventEmitter();
-      galactrumd.subscribeAddress(emitter, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      should.exist(galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
+      galactrumd.subscribeAddress(emitter, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      should.exist(galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
     });
     it('will handle multiple address subscribers', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscribeAddress(emitter2, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      should.exist(galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(2);
+      galactrumd.subscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscribeAddress(emitter2, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      should.exist(galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(2);
     });
     it('will not add the same emitter twice', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
-      galactrumd.subscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      should.exist(galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(1);
+      galactrumd.subscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      should.exist(galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(1);
     });
   });
 
@@ -275,57 +275,57 @@ describe('Galactrum Service', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscribeAddress(emitter2, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      should.exist(galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(2);
-      galactrumd.unsubscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(1);
+      galactrumd.subscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscribeAddress(emitter2, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      should.exist(galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(2);
+      galactrumd.unsubscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(1);
     });
     it('will unsubscribe subscriptions for an emitter', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'] = [emitter1, emitter2];
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'] = [emitter1, emitter2];
       galactrumd.unsubscribeAddress(emitter1);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(1);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(1);
     });
     it('will NOT unsubscribe subscription with missing address', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'] = [emitter1, emitter2];
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'] = [emitter1, emitter2];
       galactrumd.unsubscribeAddress(emitter1, ['GNp6xWV5F9JVLabd7dYQn548bXZtvUjoyL']);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(2);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(2);
     });
     it('will NOT unsubscribe subscription with missing emitter', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'] = [emitter2];
-      galactrumd.unsubscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(1);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'][0].should.equal(emitter2);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'] = [emitter2];
+      galactrumd.unsubscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(1);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'][0].should.equal(emitter2);
     });
     it('will remove empty addresses', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'] = [emitter1, emitter2];
-      galactrumd.unsubscribeAddress(emitter1, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      galactrumd.unsubscribeAddress(emitter2, ['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
-      should.not.exist(galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi']);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'] = [emitter1, emitter2];
+      galactrumd.unsubscribeAddress(emitter1, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      galactrumd.unsubscribeAddress(emitter2, ['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
+      should.not.exist(galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT']);
     });
     it('will unsubscribe emitter for all addresses', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'] = [emitter1, emitter2];
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'] = [emitter1, emitter2];
       galactrumd.subscriptions.address['GNp6xWV5F9JVLabd7dYQn548bXZtvUjoyL'] = [emitter1, emitter2];
       sinon.spy(galactrumd, 'unsubscribeAddressAll');
       galactrumd.unsubscribeAddress(emitter1);
       galactrumd.unsubscribeAddressAll.callCount.should.equal(1);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(1);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(1);
       galactrumd.subscriptions.address['GNp6xWV5F9JVLabd7dYQn548bXZtvUjoyL'].length.should.equal(1);
     });
   });
@@ -342,12 +342,12 @@ describe('Galactrum Service', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var emitter1 = new EventEmitter();
       var emitter2 = new EventEmitter();
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'] = [emitter1, emitter2];
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'] = [emitter1, emitter2];
       galactrumd.subscriptions.address['GNp6xWV5F9JVLabd7dYQn548bXZtvUjoyL'] = [emitter1, emitter2];
       galactrumd.subscriptions.address['mgY65WSfEmsyYaYPQaXhmXMeBhwp4EcsQW'] = [emitter2];
       galactrumd.subscriptions.address['7d5169eBcGHF4BYC6DTffTyeCpWbrZnNgz'] = [emitter1];
       galactrumd.unsubscribeAddress(emitter1);
-      galactrumd.subscriptions.address['8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi'].length.should.equal(1);
+      galactrumd.subscriptions.address['8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT'].length.should.equal(1);
       galactrumd.subscriptions.address['GNp6xWV5F9JVLabd7dYQn548bXZtvUjoyL'].length.should.equal(1);
       galactrumd.subscriptions.address['mgY65WSfEmsyYaYPQaXhmXMeBhwp4EcsQW'].length.should.equal(1);
       should.not.exist(galactrumd.subscriptions.address['7d5169eBcGHF4BYC6DTffTyeCpWbrZnNgz']);
@@ -891,7 +891,7 @@ describe('Galactrum Service', function() {
     it('will emit block', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       var node = {};
-      var message = new Buffer('00000000002e08fc7ae9a9aa5380e95e2adcdc5752a4a66a7d3a22466bd4e6aa', 'hex');
+      var message = new Buffer('000002709f5dab6b1ba3b5a9dccb5ce9f88c42450bca2953f1d48a3f2999c6cd', 'hex');
       galactrumd._rapidProtectedUpdateTip = sinon.stub();
       galactrumd.on('block', function(block) {
         block.should.equal(message);
@@ -902,7 +902,7 @@ describe('Galactrum Service', function() {
     it('will not emit same block twice', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       var node = {};
-      var message = new Buffer('00000000002e08fc7ae9a9aa5380e95e2adcdc5752a4a66a7d3a22466bd4e6aa', 'hex');
+      var message = new Buffer('000002709f5dab6b1ba3b5a9dccb5ce9f88c42450bca2953f1d48a3f2999c6cd', 'hex');
       galactrumd._rapidProtectedUpdateTip = sinon.stub();
       galactrumd.on('block', function(block) {
         block.should.equal(message);
@@ -914,7 +914,7 @@ describe('Galactrum Service', function() {
     it('will call function to update tip', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var node = {};
-      var message = new Buffer('00000000002e08fc7ae9a9aa5380e95e2adcdc5752a4a66a7d3a22466bd4e6aa', 'hex');
+      var message = new Buffer('000002709f5dab6b1ba3b5a9dccb5ce9f88c42450bca2953f1d48a3f2999c6cd', 'hex');
       galactrumd._rapidProtectedUpdateTip = sinon.stub();
       galactrumd._zmqBlockHandler(node, message);
       galactrumd._rapidProtectedUpdateTip.callCount.should.equal(1);
@@ -924,7 +924,7 @@ describe('Galactrum Service', function() {
     it('will emit to subscribers', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       var node = {};
-      var message = new Buffer('00000000002e08fc7ae9a9aa5380e95e2adcdc5752a4a66a7d3a22466bd4e6aa', 'hex');
+      var message = new Buffer('000002709f5dab6b1ba3b5a9dccb5ce9f88c42450bca2953f1d48a3f2999c6cd', 'hex');
       galactrumd._rapidProtectedUpdateTip = sinon.stub();
       var emitter = new EventEmitter();
       galactrumd.subscriptions.hashblock.push(emitter);
@@ -948,7 +948,7 @@ describe('Galactrum Service', function() {
         }
       };
       var node = {};
-      var message = new Buffer('00000000002e08fc7ae9a9aa5380e95e2adcdc5752a4a66a7d3a22466bd4e6aa', 'hex');
+      var message = new Buffer('000002709f5dab6b1ba3b5a9dccb5ce9f88c42450bca2953f1d48a3f2999c6cd', 'hex');
       var count = 0;
       function repeat() {
         galactrumd._rapidProtectedUpdateTip(node, message);
@@ -963,7 +963,7 @@ describe('Galactrum Service', function() {
 
   describe('#_updateTip', function() {
     var sandbox = sinon.sandbox.create();
-    var message = new Buffer('00000000002e08fc7ae9a9aa5380e95e2adcdc5752a4a66a7d3a22466bd4e6aa', 'hex');
+    var message = new Buffer('000002709f5dab6b1ba3b5a9dccb5ce9f88c42450bca2953f1d48a3f2999c6cd', 'hex');
     beforeEach(function() {
       sandbox.stub(log, 'error');
       sandbox.stub(log, 'info');
@@ -1155,7 +1155,7 @@ describe('Galactrum Service', function() {
     it('will return unique values', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var tx = orecore.Transaction();
-      var address = orecore.Address('8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi');
+      var address = orecore.Address('8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT');
       tx.addOutput(orecore.Transaction.Output({
         script: orecore.Script(address),
         satoshis: 5000000000
@@ -1316,7 +1316,7 @@ describe('Galactrum Service', function() {
         blockEvents++;
       });
       var getBestBlockHash = sinon.stub().callsArgWith(0, null, {
-        result: '00000000000000001bb82a7f5973618cfd3185ba1ded04dd852a653f92a27c45'
+        result: '00000378f8dbbba809c5bdd092650c46cf7c7665d3668db587a9d3d8f9ec7044'
       });
       getBestBlockHash.onCall(0).callsArgWith(0, {code: -1 , message: 'Test error'});
       var progress = 0.90;
@@ -1385,7 +1385,7 @@ describe('Galactrum Service', function() {
       galactrumd._updateTip = sinon.stub();
       galactrumd._subscribeZmqEvents = sinon.stub();
       var getBestBlockHash = sinon.stub().callsArgWith(0, null, {
-        result: '00000000000000001bb82a7f5973618cfd3185ba1ded04dd852a653f92a27c45'
+        result: '00000378f8dbbba809c5bdd092650c46cf7c7665d3668db587a9d3d8f9ec7044'
       });
       var info = {
         result: {
@@ -1584,7 +1584,7 @@ describe('Galactrum Service', function() {
     it('will give rpc from client getblock', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       var getBestBlockHash = sinon.stub().callsArgWith(0, null, {
-        result: '00000000000000001bb82a7f5973618cfd3185ba1ded04dd852a653f92a27c45'
+        result: '00000378f8dbbba809c5bdd092650c46cf7c7665d3668db587a9d3d8f9ec7044'
       });
       var getBlock = sinon.stub().callsArgWith(1, new Error('Test error'));
       var node = {
@@ -1594,7 +1594,7 @@ describe('Galactrum Service', function() {
         }
       };
       galactrumd._loadTipFromNode(node, function(err) {
-        getBlock.args[0][0].should.equal('00000000000000001bb82a7f5973618cfd3185ba1ded04dd852a653f92a27c45');
+        getBlock.args[0][0].should.equal('00000378f8dbbba809c5bdd092650c46cf7c7665d3668db587a9d3d8f9ec7044');
         err.should.be.instanceof(Error);
         log.warn.callCount.should.equal(0);
         done();
@@ -1617,7 +1617,7 @@ describe('Galactrum Service', function() {
     it('will set height and emit tip', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       var getBestBlockHash = sinon.stub().callsArgWith(0, null, {
-        result: '00000000000000001bb82a7f5973618cfd3185ba1ded04dd852a653f92a27c45'
+        result: '00000378f8dbbba809c5bdd092650c46cf7c7665d3668db587a9d3d8f9ec7044'
       });
       var getBlock = sinon.stub().callsArgWith(1, null, {
         result: {
@@ -3770,8 +3770,8 @@ describe('Galactrum Service', function() {
   });
 
   describe('#getRawBlock', function() {
-    var blockhash = '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b';
-    var blockhex = '0100000000000000000000000000000000000000000000000000000000000000000000003ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a29ab5f49ffff001d1dac2b7c0101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4d04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73ffffffff0100f2052a01000000434104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac00000000';
+    var blockhash = '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722';
+    var blockhex = '0000002059e46df8c24cc1bc8ee17e65cf6eb0381714bea903978885c9939d47c6000000b4dd56aad5de925b664ceb382769d17810f179d73fa52131c7907af1675f4300184dc55bcd9d031e196e02000101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff06037c5c020127ffffffff0100e9a43500000000232102daf85686ebeb6a6d2b7c42b7c5e362503dfdeb9e41d99285061a113079d0f2aaac00000000';
     it('will give rcp error from client getblockhash', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       galactrumd.nodes.push({
@@ -3862,7 +3862,7 @@ describe('Galactrum Service', function() {
         result: blockhex
       });
       var getBlockHash = sinon.stub().callsArgWith(1, null, {
-        result: '000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f'
+        result: '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722'
       });
       galactrumd.nodes.push({
         client: {
@@ -3883,7 +3883,7 @@ describe('Galactrum Service', function() {
   });
 
   describe('#getBlock', function() {
-    var blockhex = '0100000000000000000000000000000000000000000000000000000000000000000000003ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a29ab5f49ffff001d1dac2b7c0101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4d04ffff001d0104455468652054696d65732030332f4a616e2f32303039204368616e63656c6c6f72206f6e206272696e6b206f66207365636f6e64206261696c6f757420666f722062616e6b73ffffffff0100f2052a01000000434104678afdb0fe5548271967f1a67130b7105cd6a828e03909a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112de5c384df7ba0b8d578a4c702b6bf11d5fac00000000';
+    var blockhex = '0000002059e46df8c24cc1bc8ee17e65cf6eb0381714bea903978885c9939d47c6000000b4dd56aad5de925b664ceb382769d17810f179d73fa52131c7907af1675f4300184dc55bcd9d031e196e02000101000000010000000000000000000000000000000000000000000000000000000000000000ffffffff06037c5c020127ffffffff0100e9a43500000000232102daf85686ebeb6a6d2b7c42b7c5e362503dfdeb9e41d99285061a113079d0f2aaac00000000';
     it('will give an rpc error from client getblock', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       var getBlock = sinon.stub().callsArgWith(2, {code: -1, message: 'Test error'});
@@ -3918,7 +3918,7 @@ describe('Galactrum Service', function() {
         result: blockhex
       });
       var getBlockHash = sinon.stub().callsArgWith(1, null, {
-        result: '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b'
+        result: '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722'
       });
       galactrumd.nodes.push({
         client: {
@@ -3928,7 +3928,7 @@ describe('Galactrum Service', function() {
       });
       galactrumd.getBlock(0, function(err, block) {
         should.not.exist(err);
-        getBlock.args[0][0].should.equal('00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b');
+        getBlock.args[0][0].should.equal('0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722');
         getBlock.args[0][1].should.equal(false);
         block.should.be.instanceof(orecore.Block);
         done();
@@ -3946,11 +3946,11 @@ describe('Galactrum Service', function() {
           getBlockHash: getBlockHash
         }
       });
-      galactrumd.getBlock('00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b', function(err, block) {
+      galactrumd.getBlock('0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722', function(err, block) {
         should.not.exist(err);
         getBlockHash.callCount.should.equal(0);
         getBlock.callCount.should.equal(1);
-        getBlock.args[0][0].should.equal('00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b');
+        getBlock.args[0][0].should.equal('0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722');
         getBlock.args[0][1].should.equal(false);
         block.should.be.instanceof(orecore.Block);
         done();
@@ -3968,7 +3968,7 @@ describe('Galactrum Service', function() {
           getBlockHash: getBlockHash
         }
       });
-      var hash = '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b';
+      var hash = '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722';
       galactrumd.getBlock(hash, function(err, block) {
         should.not.exist(err);
         getBlockHash.callCount.should.equal(0);
@@ -3989,7 +3989,7 @@ describe('Galactrum Service', function() {
         result: blockhex
       });
       var getBlockHash = sinon.stub().callsArgWith(1, null, {
-        result: '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b'
+        result: '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722'
       });
       galactrumd.nodes.push({
         client: {
@@ -4016,10 +4016,10 @@ describe('Galactrum Service', function() {
   describe('#getBlockHashesByTimestamp', function() {
     it('should give an rpc error', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
-      var getBlockHashes = sinon.stub().callsArgWith(2, {message: 'error', code: -1});
+      var getBlockCount= sinon.stub().callsArgWith(0, {message: 'error', code: -1});
       galactrumd.nodes.push({
         client: {
-          getBlockHashes: getBlockHashes
+          getBlockCount: getBlockCount
         }
       });
       galactrumd.getBlockHashesByTimestamp(1441911000, 1441914000, function(err, hashes) {
@@ -4028,28 +4028,10 @@ describe('Galactrum Service', function() {
         done();
       });
     });
-    it('should get the correct block hashes', function(done) {
-      var galactrumd = new GalactrumService(baseConfig);
-      var block1 = '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b';
-      var block2 = '000000000383752a55a0b2891ce018fd0fdc0b6352502772b034ec282b4a1bf6';
-      var getBlockHashes = sinon.stub().callsArgWith(2, null, {
-        result: [block2, block1]
-      });
-      galactrumd.nodes.push({
-        client: {
-          getBlockHashes: getBlockHashes
-        }
-      });
-      galactrumd.getBlockHashesByTimestamp(1441914000, 1441911000, function(err, hashes) {
-        should.not.exist(err);
-        hashes.should.deep.equal([block2, block1]);
-        done();
-      });
-    });
   });
 
   describe('#getBlockHeader', function() {
-    var blockhash = '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b';
+    var blockhash = '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722';
     it('will give error from getBlockHash', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var getBlockHash = sinon.stub().callsArgWith(1, {code: -1, message: 'Test error'});
@@ -4091,35 +4073,35 @@ describe('Galactrum Service', function() {
     it('will give result from client getblockheader (from height)', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var result = {
-        hash: '0000000000000a817cd3a74aec2f2246b59eb2cbb1ad730213e6c4a1d68ec2f6',
+        hash: '000000d70d09d2cac29236a6708ccd0747a113264936f5a76c1f09751177bd74',
         version: 536870912,
-        confirmations: 5,
-        height: 828781,
-        chainWork: '00000000000000000000000000000000000000000000000ad467352c93bc6a3b',
-        prevHash: '0000000000000504235b2aff578a48470dbf6b94dafa9b3703bbf0ed554c9dd9',
-        nextHash: '00000000000000eedd967ec155f237f033686f0924d574b946caf1b0e89551b8',
-        merkleRoot: '124e0f3fb5aa268f102b0447002dd9700988fc570efcb3e0b5b396ac7db437a9',
-        time: 1462979126,
-        medianTime: 1462976771,
-        nonce: 2981820714,
-        bits: '1a13ca10',
-        difficulty: 847779.0710240941
+        confirmations: 58779,
+        height: 128781,
+        chainWork: '000000000000000000000000000000000000000000000000000001f64bd1c9ef',
+        prevHash: '000000ee908e89ce0cad3df7d9fbfd0492b04d077b359fdd33a49303ab13b3fa',
+        nextHash: '0000010135f445fc26dbe230c49cbaf25fee0974c40cbb70b488d01bda54f35e',
+        merkleRoot: 'b53a51e24bb29371e75d16e07bd4003085299ded16012fabd4559e684bcc0e6e',
+        time: 1536383429,
+        medianTime: 1536382351,
+        nonce: 342624,
+        bits: '1e030ce7',
+        difficulty: 0.00128055031363957
       };
       var getBlockHeader = sinon.stub().callsArgWith(1, null, {
         result: {
-          hash: '0000000000000a817cd3a74aec2f2246b59eb2cbb1ad730213e6c4a1d68ec2f6',
+          hash: '000000d70d09d2cac29236a6708ccd0747a113264936f5a76c1f09751177bd74',
           version: 536870912,
-          confirmations: 5,
-          height: 828781,
-          chainwork: '00000000000000000000000000000000000000000000000ad467352c93bc6a3b',
-          previousblockhash: '0000000000000504235b2aff578a48470dbf6b94dafa9b3703bbf0ed554c9dd9',
-          nextblockhash: '00000000000000eedd967ec155f237f033686f0924d574b946caf1b0e89551b8',
-          merkleroot: '124e0f3fb5aa268f102b0447002dd9700988fc570efcb3e0b5b396ac7db437a9',
-          time: 1462979126,
-          mediantime: 1462976771,
-          nonce: 2981820714,
-          bits: '1a13ca10',
-          difficulty: 847779.0710240941
+          confirmations: 58779,
+          height: 128781,
+          chainwork: '000000000000000000000000000000000000000000000000000001f64bd1c9ef',
+          previousblockhash: '000000ee908e89ce0cad3df7d9fbfd0492b04d077b359fdd33a49303ab13b3fa',
+          nextblockhash: '0000010135f445fc26dbe230c49cbaf25fee0974c40cbb70b488d01bda54f35e',
+          merkleroot: 'b53a51e24bb29371e75d16e07bd4003085299ded16012fabd4559e684bcc0e6e',
+          time: 1536383429,
+          mediantime: 1536382351,
+          nonce: 342624,
+          bits: '1e030ce7',
+          difficulty: 0.00128055031363957
         }
       });
       var getBlockHash = sinon.stub().callsArgWith(1, null, {
@@ -4140,35 +4122,35 @@ describe('Galactrum Service', function() {
     it('will give result from client getblockheader (from hash)', function() {
       var galactrumd = new GalactrumService(baseConfig);
       var result = {
-        hash: '0000000000000a817cd3a74aec2f2246b59eb2cbb1ad730213e6c4a1d68ec2f6',
+        hash: '000000d70d09d2cac29236a6708ccd0747a113264936f5a76c1f09751177bd74',
         version: 536870912,
-        confirmations: 5,
-        height: 828781,
-        chainWork: '00000000000000000000000000000000000000000000000ad467352c93bc6a3b',
-        prevHash: '0000000000000504235b2aff578a48470dbf6b94dafa9b3703bbf0ed554c9dd9',
-        nextHash: '00000000000000eedd967ec155f237f033686f0924d574b946caf1b0e89551b8',
-        merkleRoot: '124e0f3fb5aa268f102b0447002dd9700988fc570efcb3e0b5b396ac7db437a9',
-        time: 1462979126,
-        medianTime: 1462976771,
-        nonce: 2981820714,
-        bits: '1a13ca10',
-        difficulty: 847779.0710240941
+        confirmations: 58779,
+        height: 128781,
+        chainWork: '000000000000000000000000000000000000000000000000000001f64bd1c9ef',
+        prevHash: '000000ee908e89ce0cad3df7d9fbfd0492b04d077b359fdd33a49303ab13b3fa',
+        nextHash: '0000010135f445fc26dbe230c49cbaf25fee0974c40cbb70b488d01bda54f35e',
+        merkleRoot: 'b53a51e24bb29371e75d16e07bd4003085299ded16012fabd4559e684bcc0e6e',
+        time: 1536383429,
+        medianTime: 1536382351,
+        nonce: 342624,
+        bits: '1e030ce7',
+        difficulty: 0.00128055031363957
       };
       var getBlockHeader = sinon.stub().callsArgWith(1, null, {
         result: {
-          hash: '0000000000000a817cd3a74aec2f2246b59eb2cbb1ad730213e6c4a1d68ec2f6',
+          hash: '000000d70d09d2cac29236a6708ccd0747a113264936f5a76c1f09751177bd74',
           version: 536870912,
-          confirmations: 5,
-          height: 828781,
-          chainwork: '00000000000000000000000000000000000000000000000ad467352c93bc6a3b',
-          previousblockhash: '0000000000000504235b2aff578a48470dbf6b94dafa9b3703bbf0ed554c9dd9',
-          nextblockhash: '00000000000000eedd967ec155f237f033686f0924d574b946caf1b0e89551b8',
-          merkleroot: '124e0f3fb5aa268f102b0447002dd9700988fc570efcb3e0b5b396ac7db437a9',
-          time: 1462979126,
-          mediantime: 1462976771,
-          nonce: 2981820714,
-          bits: '1a13ca10',
-          difficulty: 847779.0710240941
+          confirmations: 58779,
+          height: 128781,
+          chainwork: '000000000000000000000000000000000000000000000000000001f64bd1c9ef',
+          previousblockhash: '000000ee908e89ce0cad3df7d9fbfd0492b04d077b359fdd33a49303ab13b3fa',
+          nextblockhash: '0000010135f445fc26dbe230c49cbaf25fee0974c40cbb70b488d01bda54f35e',
+          merkleroot: 'b53a51e24bb29371e75d16e07bd4003085299ded16012fabd4559e684bcc0e6e',
+          time: 1536383429,
+          mediantime: 1536382351,
+          nonce: 342624,
+          bits: '1e030ce7',
+          difficulty: 0.00128055031363957
         }
       });
       var getBlockHash = sinon.stub();
@@ -4187,7 +4169,7 @@ describe('Galactrum Service', function() {
   });
 
   describe('#getBlockHeaders', function(){
-      var blockhash = '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b';
+      var blockhash = '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722';
       it('will gave error from getBlockHash', function(){
           var galactrumd = new GalactrumService(baseConfig);
           var getBlockHash = sinon.stub().callsArgWith(1, {code: -1, message: 'Test error'});
@@ -4319,12 +4301,12 @@ describe('Galactrum Service', function() {
           getBlockHash: getBlockHash
         }
       });
-      galactrumd._maybeGetBlockHash('8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi', function(err, hash) {
+      galactrumd._maybeGetBlockHash('8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT', function(err, hash) {
         if (err) {
           return done(err);
         }
         getBlockHash.callCount.should.equal(0);
-        hash.should.equal('8oUSpiq5REeEKAzS1qSXoJbZ9TRfH1L6mi');
+        hash.should.equal('8tS9fgiv8XAmTXxWqJBv7zbeS4jzrGGwxT');
         done();
       });
     });
@@ -4434,7 +4416,7 @@ describe('Galactrum Service', function() {
   });
 
   describe('#getBlockOverview', function() {
-    var blockhash = '00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b';
+    var blockhash = '0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722';
     it('will handle error from maybeGetBlockHash', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       galactrumd._maybeGetBlockHash = sinon.stub().callsArgWith(1, new Error('test'));
@@ -4483,7 +4465,7 @@ describe('Galactrum Service', function() {
         }
       });
       function checkBlock(blockOverview) {
-        blockOverview.hash.should.equal('00000000050a6d07f583beba2d803296eb1e9d4980c4a20f206c584e89a4f02b');
+        blockOverview.hash.should.equal('0000019ea7b9d289624e7586bbcdc247dbade74461452d186b7c6e47e998d722');
         blockOverview.version.should.equal(536870912);
         blockOverview.confirmations.should.equal(5);
         blockOverview.height.should.equal(828781);
@@ -5082,10 +5064,10 @@ describe('Galactrum Service', function() {
   describe('#getInfo', function() {
     it('will give rpc error', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
-      var getInfo = sinon.stub().callsArgWith(0, {message: 'error', code: -1});
+      var getBlockchainInfo= sinon.stub().callsArgWith(0, {message: 'error', code: -1});
       galactrumd.nodes.push({
         client: {
-          getInfo: getInfo
+          getBlockchainInfo: getBlockchainInfo
         }
       });
       galactrumd.getInfo(function(err) {
@@ -5097,23 +5079,25 @@ describe('Galactrum Service', function() {
     it('will call client getInfo and give result', function(done) {
       var galactrumd = new GalactrumService(baseConfig);
       galactrumd.node.getNetworkName = sinon.stub().returns('testnet');
-      var getInfo = sinon.stub().callsArgWith(0, null, {
+      var getBlockchainInfo= sinon.stub().callsArgWith(0, null, {
+        result: {
+          blocks: 1,
+          difficulty: 1,
+        }
+      });
+      var getNetworkInfo= sinon.stub().callsArgWith(0, null, {
         result: {
           version: 1,
           protocolversion: 1,
-          blocks: 1,
           timeoffset: 1,
           connections: 1,
-          proxy: '',
-          difficulty: 1,
-          testnet: true,
           relayfee: 10,
-          errors: ''
         }
       });
       galactrumd.nodes.push({
         client: {
-          getInfo: getInfo
+          getBlockchainInfo: getBlockchainInfo,
+          getNetworkInfo: getNetworkInfo
         }
       });
       galactrumd.getInfo(function(err, info) {
@@ -5302,114 +5286,114 @@ describe('Galactrum Service', function() {
     });
 
   });
-	describe('#sporksList', function(){
-		it('will call client sporks and give result', function(done){
-			var galactrumd = new GalactrumService(baseConfig);
+  describe('#sporksList', function(){
+    it('will call client sporks and give result', function(done){
+      var galactrumd = new GalactrumService(baseConfig);
 
-			galactrumd.nodes.push({
-				client: {
-					spork: function(param, callback){
-						if(param==="show"){
-							callback(null,{result:{
-								"SPORK_2_INSTANTSEND_ENABLED":0,
-								"SPORK_3_INSTANTSEND_BLOCK_FILTERING":0,
-								"SPORK_5_INSTANTSEND_MAX_VALUE":2000,
-								"SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT":0,
-								"SPORK_9_SUPERBLOCKS_ENABLED":0,
-								"SPORK_10_MASTERNODE_PAY_UPDATED_NODES":0,
-								"SPORK_12_RECONSIDER_BLOCKS":0,
-								"SPORK_13_OLD_SUPERBLOCK_FLAG":4070908800,
-								"SPORK_14_REQUIRE_SENTINEL_FLAG":4070908800
-							}
-							})
-						}
-					}
-				}
-			});
-			galactrumd.getSpork(function(err, SporkList) {
-				if (err) {
-					return done(err);
-				}
-				SporkList.should.have.property('sporks');
-				var sporks = SporkList.sporks;
-				Object.keys(sporks).length.should.equal(9);
-				sporks['SPORK_2_INSTANTSEND_ENABLED'].should.equal(0);
-				sporks['SPORK_3_INSTANTSEND_BLOCK_FILTERING'].should.equal(0);
-				sporks['SPORK_5_INSTANTSEND_MAX_VALUE'].should.equal(2000);
-				sporks['SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT'].should.equal(0);
-				sporks['SPORK_9_SUPERBLOCKS_ENABLED'].should.equal(0);
-				sporks['SPORK_10_MASTERNODE_PAY_UPDATED_NODES'].should.equal(0);
-				sporks['SPORK_12_RECONSIDER_BLOCKS'].should.equal(0);
-				sporks['SPORK_13_OLD_SUPERBLOCK_FLAG'].should.equal(4070908800);
-				sporks['SPORK_14_REQUIRE_SENTINEL_FLAG'].should.equal(4070908800);
-				done();
-			});
-		});
-	});
+      galactrumd.nodes.push({
+        client: {
+          spork: function(param, callback){
+            if(param==="show"){
+              callback(null,{result:{
+                "SPORK_2_INSTANTSEND_ENABLED":0,
+                "SPORK_3_INSTANTSEND_BLOCK_FILTERING":0,
+                "SPORK_5_INSTANTSEND_MAX_VALUE":2000,
+                "SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT":0,
+                "SPORK_9_SUPERBLOCKS_ENABLED":0,
+                "SPORK_10_MASTERNODE_PAY_UPDATED_NODES":0,
+                "SPORK_12_RECONSIDER_BLOCKS":0,
+                "SPORK_13_OLD_SUPERBLOCK_FLAG":4070908800,
+                "SPORK_14_REQUIRE_SENTINEL_FLAG":4070908800
+              }
+              })
+            }
+          }
+        }
+      });
+      galactrumd.getSpork(function(err, SporkList) {
+        if (err) {
+          return done(err);
+        }
+        SporkList.should.have.property('sporks');
+        var sporks = SporkList.sporks;
+        Object.keys(sporks).length.should.equal(9);
+        sporks['SPORK_2_INSTANTSEND_ENABLED'].should.equal(0);
+        sporks['SPORK_3_INSTANTSEND_BLOCK_FILTERING'].should.equal(0);
+        sporks['SPORK_5_INSTANTSEND_MAX_VALUE'].should.equal(2000);
+        sporks['SPORK_8_MASTERNODE_PAYMENT_ENFORCEMENT'].should.equal(0);
+        sporks['SPORK_9_SUPERBLOCKS_ENABLED'].should.equal(0);
+        sporks['SPORK_10_MASTERNODE_PAY_UPDATED_NODES'].should.equal(0);
+        sporks['SPORK_12_RECONSIDER_BLOCKS'].should.equal(0);
+        sporks['SPORK_13_OLD_SUPERBLOCK_FLAG'].should.equal(4070908800);
+        sporks['SPORK_14_REQUIRE_SENTINEL_FLAG'].should.equal(4070908800);
+        done();
+      });
+    });
+  });
   describe('#getMNList', function(){
     it('will call client masternode list and give result', function(done){
-	    var galactrumd = new GalactrumService(baseConfig);
-	    galactrumd.isSynced = function(callback) { return callback(null, true) };
-	    galactrumd.nodes.push({
-		    client: {
-			    masternodelist: function(type, cb){
-			      switch (type){
-                      case "rank":
-	                      return cb(null, { result:
-		                      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 1,
-			                      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 2}
-	                      });
-				      case "protocol":
-					      return cb(null, { result:
-						      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 70206,
-							      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 70206}
-					      });
-                      case "payee":
-	                      return cb(null, { result:
-		                      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': "Xfpp5BxPfFistPPjTe6FucYmtDVmT1GDG3",
-			                      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': "Xn16rfdygfViHe2u36jkDUs9NLmUrUsEKa"}
-	                      });
-				      case "lastseen":
-					      return cb(null, { result:
-						      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 1502078120,
-							      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 1502078203}
-					      });
-				      case "activeseconds":
-					      return cb(null, { result:
-						      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 7016289,
-							      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 2871829}
-					      });
-				        break;
-				      case "addr":
-					      return cb(null, { result:
-						      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': "108.61.209.47:9999",
-							      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': "34.226.228.73:9999"}
-					      });
-				      case "status":
-					      return cb(null, { result:
-						      { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': "ENABLED",
-							      'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': "ENABLED"}
-					      });
-                  }
-                }
-		    }
-	    });
+      var galactrumd = new GalactrumService(baseConfig);
+      galactrumd.isSynced = function(callback) { return callback(null, true) };
+      galactrumd.nodes.push({
+        client: {
+          masternodelist: function(type, cb){
+            switch (type){
+              case "rank":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 1,
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 2}
+                });
+              case "protocol":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 70206,
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 70206}
+                });
+              case "payee":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': "Xfpp5BxPfFistPPjTe6FucYmtDVmT1GDG3",
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': "Xn16rfdygfViHe2u36jkDUs9NLmUrUsEKa"}
+                });
+              case "lastseen":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 1502078120,
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 1502078203}
+                });
+              case "activeseconds":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': 7016289,
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': 2871829}
+                });
+                break;
+              case "addr":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': "108.61.209.47:9999",
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': "34.226.228.73:9999"}
+                });
+              case "status":
+                return cb(null, { result:
+                  { '06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0': "ENABLED",
+                    'b76bafae974b80204e79858eb62aedec41159519c90d23f811cca1eca40f2e4c-1': "ENABLED"}
+                });
+            }
+          }
+        }
+      });
 
-	    galactrumd.getMNList(function(err, MNList) {
-		    if (err) {
-			    return done(err);
-		    }
-		    MNList.length.should.equal(2);
-		    MNList[0].vin.should.equal("06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0");
-		    MNList[0].status.should.equal("ENABLED");
-		    MNList[0].rank.should.equal(1);
-		    MNList[0].ip.should.equal("108.61.209.47:9999");
-		    MNList[0].protocol.should.equal(70206);
-		    MNList[0].payee.should.equal("Xfpp5BxPfFistPPjTe6FucYmtDVmT1GDG3");
-		    MNList[0].activeseconds.should.equal(7016289);
-		    MNList[0].lastseen.should.equal(1502078120);
-		    done();
-	    });
+      galactrumd.getMNList(function(err, MNList) {
+        if (err) {
+          return done(err);
+        }
+        MNList.length.should.equal(2);
+        MNList[0].vin.should.equal("06c4c53b64019a021e8597c19e40807038cab4cd422ca9241db82aa19887354b-0");
+        MNList[0].status.should.equal("ENABLED");
+        MNList[0].rank.should.equal(1);
+        MNList[0].ip.should.equal("108.61.209.47:9999");
+        MNList[0].protocol.should.equal(70206);
+        MNList[0].payee.should.equal("Xfpp5BxPfFistPPjTe6FucYmtDVmT1GDG3");
+        MNList[0].activeseconds.should.equal(7016289);
+        MNList[0].lastseen.should.equal(1502078120);
+        done();
+      });
     });
 
     it('will return error if one of nodes not synced yet', function(done){
