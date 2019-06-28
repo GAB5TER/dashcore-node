@@ -19,7 +19,7 @@ If it doesn't exist, it will create it, with basic task to connect to galactrumd
 
 Some plugins are available :
 
-- Insight-API : `./bin/orecore-node addservice insight-api
+- Insight-API : `./bin/orecore-node addservice insight-api`
 - Insight-UI : `./bin/orecore-node addservice insight-ui`
 
 You also might want to add these index to your galactrum.conf file :
