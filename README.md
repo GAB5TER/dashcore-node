@@ -46,7 +46,6 @@ node.on('ready', function() {
 
 ## Prerequisites
 
-<<<<<<< HEAD
 - Galactrum (galactrumd) with support for additional indexing *(see above)*
 - Node.js v8+
 - ZeroMQ *(libzmq3-dev for Ubuntu/Debian or zeromq on OSX)*
